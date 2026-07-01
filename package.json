@@ -1,0 +1,18 @@
+{
+	"name": "util-bot-v3",
+	"version": "0.1.0",
+	"description": "自分用のdiscord bot",
+	"license": "MIT",
+	"author": "nanaios",
+	"type": "module",
+	"main": "dist/index.js",
+	"scripts": {},
+	"dependencies": {
+		"discord.js": "^14.26.4",
+		"dotenv": "^17.4.2"
+	},
+	"devDependencies": {
+		"@typescript/native-preview": "^7.0.0-dev.20260421.2",
+		"typescript": "^6.0.3"
+	}
+}

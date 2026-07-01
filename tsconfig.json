@@ -1,0 +1,22 @@
+{
+	"compilerOptions": {
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
+		"target": "ESNext",
+		"jsx": "react-jsx",
+		"checkJs": true,
+		"allowJs": true,
+		"skipLibCheck": true,
+		"experimentalDecorators": true,
+		"strictNullChecks": true,
+		"strictFunctionTypes": true,
+		"strict": true,
+		"rootDir": "./src",
+		"outDir": "./dist"
+	},
+	"exclude": [
+		"dist",
+		"node_modules",
+		"**/node_modules/*"
+	]
+}
