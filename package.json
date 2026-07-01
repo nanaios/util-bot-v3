@@ -6,13 +6,15 @@
 	"author": "nanaios",
 	"type": "module",
 	"main": "dist/index.js",
-	"scripts": {},
+	"scripts": {
+		"start": "node dist/index.js"
+	},
 	"dependencies": {
 		"discord.js": "^14.26.4"
 	},
 	"devDependencies": {
-		"@types/node": "^26.0.1",
-		"@typescript/native-preview": "^7.0.0-dev.20260421.2",
-		"typescript": "^6.0.3"
+		"@types/node": "22.13.1",
+		"esbuild": "0.28.1",
+		"typescript": "6.0.3"
 	}
 }
