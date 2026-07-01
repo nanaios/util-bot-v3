@@ -13,7 +13,7 @@ interface EnvJson {
  * @param path string - 読み込む*.env.jsonのパス。デフォルトは"./env.json"
  * @return Promise<EnvJson> - 読み込んだ*.env.jsonの内容
  */
-const readEnvJson = async (path = "./env.json"): Promise<EnvJson> => {
+const readEnvJson = async (path = "./.env.json"): Promise<EnvJson> => {
 	const rawString = await fs.readFile(path, "utf-8");
 	return JSON.parse(rawString) as EnvJson;
 }

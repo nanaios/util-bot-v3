@@ -6,4 +6,6 @@ await esbuild.build({
 	outfile: "dist/index.js",
 	minify: true,
 	platform: "node",
+	target: "node18",
+	format: "esm"
 })
