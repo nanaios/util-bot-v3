@@ -4,6 +4,7 @@ import fs from "fs/promises";
  * 今回のプロジェクトで使用する*.env.jsonの型定義
  */
 interface EnvJson {
+	loginToken: string;
 	targetGuildId: string;
 	targetChannelIds: string[];
 }

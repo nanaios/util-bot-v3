@@ -1,11 +1,14 @@
+import { Client, GatewayIntentBits } from "discord.js";
 import { readEnvJson } from "./EnvJson";
 
-const main = async () => {
-	console.log("Hello, World!");
+const env = await readEnvJson();
 
-	const envJson = await readEnvJson();
-	console.log(envJson);
-}
+const client = new Client({
+	intents: [GatewayIntentBits.Guilds, GatewayIntentBits.MessageContent],
+});
 
+client.once("clientReady", (client) => {
+	console.log(`Bot ${client.user.displayName} is ready!`);
+});
 
-main();
+client.login(env.loginToken);

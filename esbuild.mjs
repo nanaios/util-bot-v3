@@ -4,8 +4,10 @@ await esbuild.build({
 	entryPoints: ["src/index.ts"],
 	bundle: true,
 	outfile: "dist/index.js",
+
 	minify: true,
 	platform: "node",
 	target: "node18",
-	format: "esm"
+	format: "esm",
+	external: ["./node_modules/*"],
 })
