@@ -8,10 +8,10 @@
 	"main": "dist/index.js",
 	"scripts": {},
 	"dependencies": {
-		"discord.js": "^14.26.4",
-		"dotenv": "^17.4.2"
+		"discord.js": "^14.26.4"
 	},
 	"devDependencies": {
+		"@types/node": "^26.0.1",
 		"@typescript/native-preview": "^7.0.0-dev.20260421.2",
 		"typescript": "^6.0.3"
 	}

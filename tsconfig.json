@@ -2,7 +2,7 @@
 	"compilerOptions": {
 		"module": "ESNext",
 		"moduleResolution": "Bundler",
-		"target": "ESNext",
+		"target": "esnext",
 		"jsx": "react-jsx",
 		"checkJs": true,
 		"allowJs": true,
@@ -12,7 +12,10 @@
 		"strictFunctionTypes": true,
 		"strict": true,
 		"rootDir": "./src",
-		"outDir": "./dist"
+		"outDir": "./dist",
+		"types": [
+			"node"
+		]
 	},
 	"exclude": [
 		"dist",
