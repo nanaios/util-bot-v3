@@ -25,7 +25,7 @@ const backup = async () =>
 {
 	if ( !client.isReady() ) return
 
-	// 対象Guildの対象Channelを取得
+	// 対象ギルドの対象チャンネルを取得
 	const targetGuild = await client.guilds.fetch( TARGET_GUILD_ID )
 	const targetChannels: TextChannel[] = []
 
@@ -45,7 +45,7 @@ const backup = async () =>
 		}
 	}
 
-	// Channel情報hを更新
+	// チャンネル情報を更新
 	for ( const channel of targetChannels )
 	{
 		console.log( `find channel ${ channel?.name } [id: ${ channel?.id }]` )
@@ -58,7 +58,7 @@ client.once( "clientReady", ( client ) =>
 {
 	console.log( `Bot ${ client.user.displayName } is ready!` )
 
-	// setTimeoutで、指定秒数後からバックアップ処理を開始
+	// 指定秒数後からバックアップ処理を開始
 	setTimeout( backup, MAIN_START_DELAY )
 	console.log( `The backup will start in ${ MAIN_START_DELAY } seconds.` )
 } )

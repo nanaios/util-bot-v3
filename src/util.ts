@@ -3,6 +3,9 @@ import dotenv from "dotenv"
 // 環境変数の初期化
 dotenv.config()
 
+/**
+ * このプログラムがdevelopmentであるかを表すフラグ
+ */
 const IS_DEVELOPMENT_MODE = process.env.NODE_ENV === "development"
 
 /**
@@ -31,4 +34,4 @@ const devLog = ( message?: any, ...optionalParams: any[] ) =>
 	}
 }
 
-export { notNull, devLog }
+export { notNull, devLog, IS_DEVELOPMENT_MODE }
