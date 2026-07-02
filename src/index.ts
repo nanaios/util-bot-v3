@@ -1,6 +1,7 @@
 import { Client, GatewayIntentBits, TextChannel, type TextBasedChannel } from "discord.js"
-import { readEnvJson } from "./envJson"
+import { readEnvJson } from "./EnvJson"
 
+// メインの処理が開始するまでの遅延時間
 const MAIN_START_DELAY = 1000
 
 // 必要な環境変数を読み込む
