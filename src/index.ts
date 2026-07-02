@@ -1,6 +1,5 @@
 import { Client, GatewayIntentBits, TextChannel, type TextBasedChannel } from "discord.js"
 import { readEnvJson } from "./envJson"
-import { findFirstMessageId } from "./imageCollector"
 
 const MAIN_START_DELAY = 1000
 
@@ -35,10 +34,6 @@ const backup = async () =>
 	for ( const channel of targetChannels )
 	{
 		console.log( `find channel ${ channel?.name } [id: ${ channel?.id }]` )
-		const oldestMessageId = await findFirstMessageId( channel )
-		console.log( `oldest message id: ${ oldestMessageId }` )
-
-		console.log()
 	}
 }
 

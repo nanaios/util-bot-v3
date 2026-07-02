@@ -1,7 +1,7 @@
 import * as esbuild from "esbuild"
 
-await esbuild.build({
-	entryPoints: ["src/index.ts"],
+await esbuild.build( {
+	entryPoints: [ "src/index.ts" ],
 	bundle: true,
 	outfile: "dist/index.js",
 
@@ -9,5 +9,5 @@ await esbuild.build({
 	platform: "node",
 	target: "node18",
 	format: "esm",
-	external: ["./node_modules/*"],
-})
+	external: [ "./node_modules/*" ],
+} )
