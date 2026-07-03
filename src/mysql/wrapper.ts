@@ -1,17 +1,5 @@
-import mysql, { type ConnectionOptions, type Connection, type ConnectionState, type PreparedStatementInfo, type QueryOptions } from "mysql2/promise"
-import { devLog, notNull } from "./util"
-import EventEmitter from "node:events"
-
-// MySQL用の環境変数を取得
-const MYSQL_HOST = notNull( process.env.MYSQL_HOST )
-const MYSQL_USER = notNull( process.env.MYSQL_USER )
-const MYSQL_PASSWORD = notNull( process.env.MYSQL_PASSWORD )
-const MYSQL_DATABASE = notNull( process.env.MYSQL_DATABASE )
-
-devLog( `MYSQL_HOST = ${ MYSQL_HOST }` )
-devLog( `MYSQL_USER = ${ MYSQL_USER }` )
-devLog( `MYSQL_PASSWORD = ${ MYSQL_PASSWORD }` )
-devLog( `MYSQL_DATABASE = ${ MYSQL_DATABASE }` )
+import EventEmitter from "events"
+import type { Connection, ConnectionOptions, FieldPacket, PreparedStatementInfo, QueryOptions } from "mysql2/promise"
 
 /**
  * {@link Connection}を抽象化したinterface
@@ -20,6 +8,9 @@ interface IConnection extends Connection
 {
 }
 
+/**
+ * {@link Connection}をラップして、{@link IConnection}として使用できるようにしたもの
+ */
 class ConnectionWrapper implements IConnection
 {
 	private connection: Connection
@@ -52,11 +43,11 @@ class ConnectionWrapper implements IConnection
 		this.connection = connection
 	}
 
-	query<T> ( options: unknown, values?: unknown ): Promise<[ T, mysql.FieldPacket[] ]> | Promise<[ T, mysql.FieldPacket[] ]>
+	query<T> ( options: unknown, values?: unknown ): Promise<[ T, FieldPacket[] ]> | Promise<[ T, FieldPacket[] ]>
 	{
 		return this.connection.query( options as any, values as any ) as any
 	}
-	execute<T> ( options: unknown, values?: unknown ): Promise<[ T, mysql.FieldPacket[] ]> | Promise<[ T, mysql.FieldPacket[] ]>
+	execute<T> ( options: unknown, values?: unknown ): Promise<[ T, FieldPacket[] ]> | Promise<[ T, FieldPacket[] ]>
 	{
 		return this.connection.execute( options as any, values as any ) as any
 	}
@@ -210,23 +201,6 @@ class ConnectionWrapper implements IConnection
 	{
 		return this.connection[ Symbol.asyncDispose ]()
 	}
-
 }
 
-/**
- * MySQL用のコネクションを生成します
- * @returns 
- */
-const createConnection = async (): Promise<IConnection> =>
-{
-	const connection = await mysql.createConnection( {
-		host: MYSQL_HOST,
-		user: MYSQL_USER,
-		password: MYSQL_PASSWORD,
-		database: MYSQL_DATABASE
-	} )
-
-	return new ConnectionWrapper( connection )
-}
-
-export { createConnection }
+export { IConnection, ConnectionWrapper }

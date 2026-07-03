@@ -1,7 +1,7 @@
 import type { TextChannel } from "discord.js"
-import { createConnection } from "./mysql_util"
+import { createConnection } from "../mysql/util"
 import type { RowDataPacket } from "mysql2"
-import { devLog } from "./util"
+import { devLog } from "../util"
 
 const CHANNEL_INFO_TABLE_NAME = "channel_info"
 

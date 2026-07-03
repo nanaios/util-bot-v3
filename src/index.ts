@@ -1,6 +1,6 @@
 import { Client, GatewayIntentBits, TextChannel, type TextBasedChannel } from "discord.js"
 import { devLog, notNull } from "./util"
-import { updateChannelInfo } from "./channel_info"
+import { updateChannelInfo } from "./discord/channel_info"
 
 // 環境変数を取得
 const BOT_LOGIN_TOKEN = notNull( process.env.BOT_LOGIN_TOKEN )
