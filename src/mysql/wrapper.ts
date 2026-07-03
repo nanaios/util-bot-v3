@@ -1,11 +1,36 @@
 import EventEmitter from "events"
-import type { Connection, ConnectionOptions, FieldPacket, PreparedStatementInfo, QueryOptions } from "mysql2/promise"
+import type { Connection, ConnectionOptions, FieldPacket, PreparedStatementInfo, QueryOptions, QueryResult, QueryValues } from "mysql2/promise"
+import { type Delete, type Insert, type Select, type Update, type Squel, squel } from "squel"
+import { MySQLQueryError } from "./error"
+
+/**
+ * {@link Squel}のクエリーとして処理できるものをまとめた型
+ */
+type Queryable = Select | Insert | Update | Delete
 
 /**
  * {@link Connection}を抽象化したinterface
  */
 interface IConnection extends Connection
 {
+	query<T extends QueryResult> ( sql: string, values?: QueryValues ): Promise<[ T, FieldPacket[] ]>
+	query<T extends QueryResult> ( options: QueryOptions, values?: QueryValues ): Promise<[ T, FieldPacket[] ]>
+	query<T extends QueryResult> ( sql: Queryable, values?: QueryValues ): Promise<[ T, FieldPacket[] ]>
+}
+
+/**
+ * 与えられた引数が{@link QueryOptions}型かどうか判定します
+ * @param arg 
+ * @returns 
+ */
+const isQueryOptions = ( arg: unknown ): arg is QueryOptions =>
+{
+	return "sql" in ( arg as any )
+}
+
+const isQueryable = ( arg: unknown ): arg is Queryable =>
+{
+	return "options" in ( arg as any )
 }
 
 /**
@@ -42,10 +67,22 @@ class ConnectionWrapper implements IConnection
 	{
 		this.connection = connection
 	}
-
-	query<T> ( options: unknown, values?: unknown ): Promise<[ T, FieldPacket[] ]> | Promise<[ T, FieldPacket[] ]>
+	query<T extends QueryResult> ( options: unknown, values?: QueryValues ): Promise<[ T, FieldPacket[] ]> | Promise<[ T, FieldPacket[] ]>
 	{
-		return this.connection.query( options as any, values as any ) as any
+		if ( typeof options === "string" )
+		{
+			return this.connection.query( options, values )
+		} else if ( isQueryOptions( options ) )
+		{
+			return this.connection.query( options, values )
+		}
+		else if ( isQueryable( options ) )
+		{
+			return this.connection.query( options.toString(), values )
+		} else
+		{
+			throw new MySQLQueryError( "The argument cannot be processed as a query." )
+		}
 	}
 	execute<T> ( options: unknown, values?: unknown ): Promise<[ T, FieldPacket[] ]> | Promise<[ T, FieldPacket[] ]>
 	{
