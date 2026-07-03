@@ -1,9 +1,9 @@
 import * as esbuild from "esbuild"
 
 await esbuild.build( {
-	entryPoints: [ "src/index.ts" ],
+	entryPoints: [ "src/entry.ts" ],
 	bundle: true,
-	outfile: "dist/index.js",
+	outfile: "dist/entry.js",
 
 	minify: true,
 	platform: "node",

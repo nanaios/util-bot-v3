@@ -16,7 +16,7 @@ const updateChannelInfo = async ( channel: TextChannel ) =>
 	const firstMessageId = await findFirstMessageId( channel )
 
 	// テーブルにチャンネルの情報があるかチェック
-	const selectSql = squel.select().field( "count(*)" ).from( CHANNEL_INFO_TABLE_NAME ).where( `channel_id = ${ channel.id }` )
+	const selectSql = squel.select().field( "count(*)" ).from( CHANNEL_INFO_TABLE_NAME ).where( "", "", "" )
 	const [ selectResult ] = await dbc.query<RowDataPacket[]>( selectSql )
 	const count = selectResult[ 0 ][ "count(*)" ] as Number
 
@@ -39,4 +39,4 @@ const updateChannelInfo = async ( channel: TextChannel ) =>
 }
 
 
-export { updateChannelInfo }
+export { updateChannelInfo, CHANNEL_INFO_TABLE_NAME }

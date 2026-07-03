@@ -1,10 +1,9 @@
 import type { TextChannel } from "discord.js"
 
-
 /**
- * 対象チャンネル内で最初に投稿されたメッセージを取得し、メッセージIDを返す
- * @param channel
- * @returns
+ * 対象チャンネル内で最初に投稿されたメッセージを取得し、メッセージのidを返す関数
+ * @param channel - メッセージの取得元のチャンネル
+ * @returns メッセージのid
  */
 export const findFirstMessageId = async ( channel: TextChannel ) =>
 {

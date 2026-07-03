@@ -1,3 +1,5 @@
+// 汎用的な関数を定義するファイル
+
 import dotenv from "dotenv"
 
 // 環境変数の初期化
