@@ -1,6 +1,15 @@
+# ライブラリフォルダ
 node_modules
+
+# ビルド成果物格納フォルダ
+# imageのビルド時に既存のビルド成果物が紛れ込まないように除外
 dist
+
+# imageのビルドに不要なフォルダ
 sql
+test
 .vscode
 .git
+
+# imageのビルドに不要なファイル
 .env
