@@ -5,7 +5,7 @@ import type { TextChannel } from "discord.js"
  * @param channel - メッセージの取得元のチャンネル
  * @returns メッセージのid
  */
-export const findFirstMessageId = async ( channel: TextChannel ) =>
+const findFirstMessageId = async ( channel: TextChannel ) =>
 {
 	// 最新のメッセージを確認
 	if ( !channel.lastMessageId ) return ""
@@ -32,3 +32,5 @@ export const findFirstMessageId = async ( channel: TextChannel ) =>
 
 	return currentMessageId
 }
+
+export { findFirstMessageId }

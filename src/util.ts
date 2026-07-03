@@ -28,7 +28,7 @@ const notNull = <T> ( value: T ): NonNullable<T> =>
 /**
  * NODE_ENVがdevelopmentの時のみ動作するログ関数
  */
-const devLog = ( message?: any, ...optionalParams: any[] ) =>
+const developLog = ( message?: any, ...optionalParams: any[] ) =>
 {
 	if ( IS_DEVELOPMENT_MODE )
 	{
@@ -36,4 +36,4 @@ const devLog = ( message?: any, ...optionalParams: any[] ) =>
 	}
 }
 
-export { notNull, devLog, IS_DEVELOPMENT_MODE }
+export { notNull, developLog, IS_DEVELOPMENT_MODE }

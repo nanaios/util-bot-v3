@@ -28,5 +28,14 @@ const getTextChannels = async ( guild: Guild, targetChannelIds: string[] ) =>
 
 	return targetChannels
 }
+/**
+ * 対象チャンネルの情報を表示する関数
+ * @param channel - 表示するチャンネル
+ */
+const logChannelInfo = ( channel: TextChannel ) =>
+{
+	console.log( `channel ${ channel.name } [id: ${ channel.id }]` )
+}
 
-export { getTextChannels }
+
+export { getTextChannels, logChannelInfo }
