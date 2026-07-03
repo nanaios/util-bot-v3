@@ -8,7 +8,8 @@
 	"main": "dist/index.js",
 	"scripts": {
 		"start": "node dist/index.js",
-		"build": "node esbuild.mjs"
+		"build": "node esbuild.mjs",
+		"test": "npx vitest"
 	},
 	"dependencies": {
 		"discord.js": "14.26.4",
@@ -19,6 +20,7 @@
 		"@types/mysql": "2.15.27",
 		"@types/node": "22.13.1",
 		"esbuild": "0.28.1",
-		"typescript": "6.0.3"
+		"typescript": "6.0.3",
+		"vitest": "4.1.9"
 	}
 }

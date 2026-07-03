@@ -11,15 +11,19 @@
 		"strictNullChecks": true,
 		"strictFunctionTypes": true,
 		"strict": true,
-		"rootDir": "./src",
 		"outDir": "./dist",
 		"types": [
 			"node"
 		]
 	},
+	"include": [
+		"./src/**/*",
+		"./test/**/*"
+	],
 	"exclude": [
 		"dist",
 		"esbuild.mjs",
+		"vitest.config.ts",
 		"node_modules",
 		"**/node_modules/*"
 	]
