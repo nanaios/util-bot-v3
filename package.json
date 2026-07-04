@@ -7,9 +7,11 @@
 	"type": "module",
 	"main": "dist/index.js",
 	"scripts": {
-		"start": "node dist/entry.js",
+		"start": "docker compose up --build",
 		"build": "node esbuild.mjs",
-		"test": "npx vitest"
+		"test": "npx vitest",
+		"build_image": "docker build -t 192.168.0.168:5000/discord-util-bot-v3:latest .",
+		"push_image": "docker push 192.168.0.168:5000/discord-util-bot-v3:latest"
 	},
 	"dependencies": {
 		"discord.js": "14.26.4",

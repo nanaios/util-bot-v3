@@ -1,6 +1,7 @@
 services:
   bot:
-    build: .
+    image: 192.168.0.168:5000/discord-util-bot-v3:latest
+    pull_policy: always
     restart: unless-stopped
     env_file: .env
     volumes:

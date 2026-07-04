@@ -92,7 +92,7 @@ const backupImage = async ( channel: TextChannel ) =>
 
 				// 処理済みのメッセージidを更新
 				lastBackupMessageId = id
-				// executeUpdateBackupProgress( connection, channel, Number( id ) )
+				executeUpdateBackupProgress( connection, channel, Number( id ) )
 			}
 		}
 	} catch ( e )
