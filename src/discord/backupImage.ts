@@ -2,7 +2,7 @@
 
 import { createDownloadFileInfos, createDownloadFolder, downloadFile } from "@/file/download"
 import { createConnection } from "@/mysql/dataBase"
-import { executeInsertBackupProgress, executeSelectBackupProgress } from "@/mysql/query"
+import { executeInsertBackupProgress, executeSelectBackupProgress, executeUpdateBackupProgress } from "@/mysql/query"
 import { developLog } from "@/util"
 import type { TextChannel } from "discord.js"
 import type { Connection } from "mysql2/promise"
@@ -74,7 +74,7 @@ const backupImage = async ( channel: TextChannel ) =>
 
 				// ダウンロードに必要な情報を作成
 				const infos = createDownloadFileInfos( message )
-				//developLog( infos )
+				developLog( infos )
 
 				for ( const info of infos )
 				{
@@ -87,7 +87,12 @@ const backupImage = async ( channel: TextChannel ) =>
 
 					// ファイルを保存
 					await fs.writeFile( downloadFilePath, buffer )
+					developLog( `file saved to ${ downloadFilePath }` )
 				}
+
+				// 処理済みのメッセージidを更新
+				lastBackupMessageId = id
+				// executeUpdateBackupProgress( connection, channel, Number( id ) )
 			}
 		}
 	} catch ( e )

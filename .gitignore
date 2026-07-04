@@ -1,6 +1,10 @@
 # 環境変数用のファイル
 *.env
 
+# 環境独自のファイル
+compose.override.yml
+backups
+
 # ビルド成果物格納フォルダ
 /dist
 
