@@ -2,13 +2,17 @@
 
 import dotenv from "dotenv"
 
-// 環境変数の初期化
-dotenv.config()
-
 /**
  * このプログラムがdevelopmentであるかを表すフラグ
  */
 const IS_DEVELOPMENT_MODE = process.env.NODE_ENV === "development"
+
+
+if ( IS_DEVELOPMENT_MODE )
+{
+	// 環境変数の初期化
+	dotenv.config()
+}
 
 /**
  * 値がnull,undefinedでは無いことを保証する関数です。

@@ -24,4 +24,4 @@ RUN npm ci --omit=dev
 # ビルド成果物だけをStage 1からコピー
 COPY --from=builder /app/dist ./dist
 
-CMD ["node", "dist/index.js"]
+CMD ["node", "dist/entry.js"]

@@ -7,7 +7,6 @@ import { developLog } from "@/util"
 import type { TextChannel } from "discord.js"
 import type { Connection } from "mysql2/promise"
 import path from "path"
-import { setTimeout } from "timers/promises"
 import fs from "fs/promises"
 
 /**

@@ -5,7 +5,7 @@ await esbuild.build( {
 	bundle: true,
 	outfile: "dist/entry.js",
 
-	minify: true,
+	//minify: true,
 	platform: "node",
 	target: "node18",
 	format: "esm",
