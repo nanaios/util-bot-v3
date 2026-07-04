@@ -11,7 +11,13 @@
 		"strictNullChecks": true,
 		"strictFunctionTypes": true,
 		"strict": true,
+		"rootDir": "./src",
 		"outDir": "./dist",
+		"paths": {
+			"@/*": [
+				"./src/*"
+			]
+		},
 		"types": [
 			"node"
 		]

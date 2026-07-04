@@ -1,12 +1,11 @@
 // Botの実行起点となるファイル
 
 import { Client, GatewayIntentBits } from "discord.js"
-import { developLog, notNull } from "./util"
-import { main } from "./main"
+import { developLog, notNull } from "@/util"
+import { main } from "@/main"
 
 // 環境変数を取得
 const BOT_LOGIN_TOKEN = notNull( process.env.BOT_LOGIN_TOKEN )
-
 developLog( `BOT_LOGIN_TOKEN = ${ BOT_LOGIN_TOKEN }` )
 
 // Botのインスタンスを作成
