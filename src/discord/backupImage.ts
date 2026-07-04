@@ -90,8 +90,6 @@ const backupImage = async ( channel: TextChannel ) =>
 					await fs.writeFile( downloadFilePath, buffer )
 				}
 			}
-
-			await setTimeout( 100000000 )
 		}
 	} catch ( e )
 	{
