@@ -44,9 +44,9 @@ const executeUpdateBackupProgress = async ( connection: Connection, channel: Tex
 	console.group( "execut update" )
 
 	const sql = squel
-		.insert().into( BACKUP_PROGRESS_TABLE_NAME )
-		.set( "channel_id", channel.id )
+		.update().table( BACKUP_PROGRESS_TABLE_NAME )
 		.set( "last_backup_message_id", messageId )
+		.where( "channel_id = ?", channel.id )
 		.toString()
 	developLog( `execute sql: ${ sql }` )
 
@@ -70,9 +70,9 @@ const executeInsertBackupProgress = async ( connection: Connection, channel: Tex
 	console.group( "execut insert" )
 
 	const sql = squel
-		.update().table( BACKUP_PROGRESS_TABLE_NAME )
+		.insert().into( BACKUP_PROGRESS_TABLE_NAME )
+		.set( "channel_id", channel.id )
 		.set( "last_backup_message_id", messageId )
-		.where( "channel_id = ?", channel.id )
 		.toString()
 	developLog( `execute sql: ${ sql }` )
 

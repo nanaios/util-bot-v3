@@ -1,11 +1,14 @@
 // 画像のバックアップ処理を定義するファイル
 
-import { createDownloadFileInfos } from "@/file/download"
+import { createDownloadFileInfos, createDownloadFolder, downloadFile } from "@/file/download"
 import { createConnection } from "@/mysql/dataBase"
 import { executeInsertBackupProgress, executeSelectBackupProgress } from "@/mysql/query"
 import { developLog } from "@/util"
 import type { TextChannel } from "discord.js"
 import type { Connection } from "mysql2/promise"
+import path from "path"
+import { setTimeout } from "timers/promises"
+import fs from "fs/promises"
 
 /**
  * 画像のバックアップ処理を行う関数
@@ -46,6 +49,9 @@ const backupImage = async ( channel: TextChannel ) =>
 		}
 		developLog( `lastBackupMessageId = ${ lastBackupMessageId }` )
 
+		// ダウンロード先のフォルダを作成
+		const downloadFolderPath = await createDownloadFolder( channel )
+
 		// 画像のバックアップを行う
 		while ( true )
 		{
@@ -53,7 +59,7 @@ const backupImage = async ( channel: TextChannel ) =>
 			const messages = await channel.messages.fetch( {
 				cache: false,
 				after: lastBackupMessageId,
-				limit: 100
+				limit: 5
 			} )
 
 			// メッセージが存在しなければ終了
@@ -69,8 +75,23 @@ const backupImage = async ( channel: TextChannel ) =>
 
 				// ダウンロードに必要な情報を作成
 				const infos = createDownloadFileInfos( message )
-				developLog( infos )
+				//developLog( infos )
+
+				for ( const info of infos )
+				{
+					// ファイルを取得
+					const buffer = await downloadFile( info )
+
+					// ファイルパスを作成
+					const downloadFilePath = path.join( downloadFolderPath, info.fileName )
+					developLog( `downloadFilePath: ${ downloadFilePath }` )
+
+					// ファイルを保存
+					await fs.writeFile( downloadFilePath, buffer )
+				}
 			}
+
+			await setTimeout( 100000000 )
 		}
 	} catch ( e )
 	{
