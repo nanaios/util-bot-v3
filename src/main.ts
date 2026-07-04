@@ -5,7 +5,7 @@ import { notNull, developLog } from "@/util"
 import { getTextChannels, logChannelInfo } from "@/discord/channel"
 import { channelInfoUpdater } from "@/discord/channelInfoUpdater"
 import { setTimeout } from "timers/promises"
-import { imageBackuper } from "@/discord/imageBackUper"
+import { imageBackuper } from "@/discord/imageBackuper"
 
 // 環境変数を取得
 const TARGET_GUILD_ID = notNull( process.env.TARGET_GUILD_ID )
