@@ -1,6 +1,8 @@
 // 画像のバックアップ処理を定義するファイル
 
 import { createConnection } from "@/mysql/dataBase"
+import { executeSelectBackupProgress } from "@/mysql/query"
+import { developLog } from "@/util"
 import type { TextChannel } from "discord.js"
 import type { Connection } from "mysql2/promise"
 
@@ -18,7 +20,8 @@ const imageBackuper = async ( channel: TextChannel ) =>
 		// コネクションの初期化
 		connection = await createConnection()
 
-
+		const backupProgress = await executeSelectBackupProgress( connection, channel )
+		developLog( backupProgress )
 
 
 	} catch ( e )

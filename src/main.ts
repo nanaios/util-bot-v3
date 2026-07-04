@@ -3,7 +3,6 @@
 import type { Client } from "discord.js"
 import { notNull, developLog } from "@/util"
 import { getTextChannels, logChannelInfo } from "@/discord/channel"
-import { channelInfoUpdater } from "@/discord/channelInfoUpdater"
 import { setTimeout } from "timers/promises"
 import { imageBackuper } from "@/discord/imageBackuper"
 
@@ -15,9 +14,7 @@ developLog( `TARGET_CHANNEL_IDS = ${ TARGET_CHANNEL_IDS }` )
 
 // 実行間隔の定義
 const IMAGE_BACKUP_INTERVAL = 1000 * 60 * 10
-const CHANNEL_INFO_UPDATE_INTERVAL = 1000 * 60 * 60
 developLog( `IMAGE_BACKUP_INTERVAL = ${ IMAGE_BACKUP_INTERVAL }` )
-developLog( `CHANNEL_INFO_UPDATE_INTERVAL = ${ CHANNEL_INFO_UPDATE_INTERVAL }` )
 
 /**
  * Botのメイン処理
@@ -33,9 +30,6 @@ const main = async ( client: Client<true> ) =>
 	{
 		// チャンネルの情報を表示
 		logChannelInfo( channel )
-
-		// channel_infoテーブルの更新を定期実行するように設定
-		setInterval( () => channelInfoUpdater( channel ), CHANNEL_INFO_UPDATE_INTERVAL )
 	}
 
 	// バックアップ処理
