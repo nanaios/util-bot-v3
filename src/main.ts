@@ -4,7 +4,7 @@ import type { Client } from "discord.js"
 import { notNull, developLog } from "@/util"
 import { getTextChannels, logChannelInfo } from "@/discord/channel"
 import { setTimeout } from "timers/promises"
-import { imageBackuper } from "@/discord/imageBackuper"
+import { backupImage } from "@/discord/backupImage"
 
 // 環境変数を取得
 const TARGET_GUILD_ID = notNull( process.env.TARGET_GUILD_ID )
@@ -22,6 +22,8 @@ developLog( `IMAGE_BACKUP_INTERVAL = ${ IMAGE_BACKUP_INTERVAL }` )
  */
 const main = async ( client: Client<true> ) =>
 {
+	console.group( "main func" )
+
 	// 対象サーバーの対象チャンネルを取得
 	const targetGuild = await client.guilds.fetch( TARGET_GUILD_ID )
 	const targetChannels = await getTextChannels( targetGuild, TARGET_CHANNEL_IDS )
@@ -37,7 +39,7 @@ const main = async ( client: Client<true> ) =>
 	{
 		for ( const channel of targetChannels )
 		{
-			imageBackuper( channel )
+			await backupImage( channel )
 		}
 
 		// 指定時間待機し、負荷を軽減
