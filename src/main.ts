@@ -1,10 +1,11 @@
 // Botのメイン処理を定義するファイル
 
-import type { Client, TextChannel } from "discord.js"
+import type { Client } from "discord.js"
 import { notNull, developLog } from "@/util"
-import { getTextChannels, logChannelInfo, updateChannelInfo } from "@/discord/channel"
-import type { Connection } from "mysql2/promise"
-import { createConnection } from "@/mysql/dataBase"
+import { getTextChannels, logChannelInfo } from "@/discord/channel"
+import { channelInfoUpdater } from "@/discord/channelInfoUpdater"
+import { setTimeout } from "timers/promises"
+import { imageBackuper } from "@/discord/imageBackUper"
 
 // 環境変数を取得
 const TARGET_GUILD_ID = notNull( process.env.TARGET_GUILD_ID )
@@ -12,8 +13,11 @@ const TARGET_CHANNEL_IDS = notNull( process.env.TARGET_CHANNEL_IDS ).split( "," 
 developLog( `TARGET_GUILD_ID = ${ TARGET_GUILD_ID }` )
 developLog( `TARGET_CHANNEL_IDS = ${ TARGET_CHANNEL_IDS }` )
 
-// channel_infoテーブルの更新間隔
+// 実行間隔の定義
+const IMAGE_BACKUP_INTERVAL = 1000 * 60 * 10
 const CHANNEL_INFO_UPDATE_INTERVAL = 1000 * 60 * 60
+developLog( `IMAGE_BACKUP_INTERVAL = ${ IMAGE_BACKUP_INTERVAL }` )
+developLog( `CHANNEL_INFO_UPDATE_INTERVAL = ${ CHANNEL_INFO_UPDATE_INTERVAL }` )
 
 /**
  * Botのメイン処理
@@ -33,34 +37,21 @@ const main = async ( client: Client<true> ) =>
 		// channel_infoテーブルの更新を定期実行するように設定
 		setInterval( () => channelInfoUpdater( channel ), CHANNEL_INFO_UPDATE_INTERVAL )
 	}
-}
 
-/**
- * channel_infoテーブルの更新関数
- * @param channel - 情報を更新したいチャンネル
- */
-const channelInfoUpdater = async ( channel: TextChannel ) =>
-{
-	// コネクション用の変数を用意
-	let connection: Connection | undefined
-	try
+	// バックアップ処理
+	while ( true )
 	{
-		// コネクションの初期化
-		connection = await createConnection()
-
-		// 更新の実行
-		await updateChannelInfo( connection, channel )
-	} catch ( e )
-	{
-		console.error( e )
-	} finally
-	{
-		// 正常時、異常時問わずコネクションを閉じる
-		if ( connection )
+		for ( const channel of targetChannels )
 		{
-			await connection.end()
+			imageBackuper( channel )
 		}
+
+		// 指定時間待機し、負荷を軽減
+		await setTimeout( IMAGE_BACKUP_INTERVAL )
 	}
 }
 
-export { main }
+export
+{
+	main
+}

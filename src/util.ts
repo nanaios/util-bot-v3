@@ -36,4 +36,9 @@ const developLog = ( message?: any, ...optionalParams: any[] ) =>
 	}
 }
 
-export { notNull, developLog, IS_DEVELOPMENT_MODE }
+export
+{
+	notNull,
+	developLog,
+	IS_DEVELOPMENT_MODE
+}

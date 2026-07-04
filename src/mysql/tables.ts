@@ -1,3 +1,5 @@
+// MySQLサーバーのテーブルの型定義用ファイル
+
 import type { RowDataPacket } from "mysql2"
 
 /**
@@ -10,4 +12,17 @@ interface ChannelInfo extends RowDataPacket
 	first_message_id: number
 }
 
-export { ChannelInfo }
+/**
+ * backup_progressテーブルの型定義
+ */
+interface BackupProgress extends RowDataPacket
+{
+	channel_id: number
+	last_backup_message_id: number
+}
+
+export
+{
+	ChannelInfo,
+	BackupProgress
+}

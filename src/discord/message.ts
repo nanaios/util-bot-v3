@@ -1,3 +1,5 @@
+// メッセージを直接処理する関数を定義するファイル
+
 import type { TextChannel } from "discord.js"
 
 /**
@@ -33,4 +35,7 @@ const findFirstMessageId = async ( channel: TextChannel ) =>
 	return currentMessageId
 }
 
-export { findFirstMessageId }
+export
+{
+	findFirstMessageId
+}

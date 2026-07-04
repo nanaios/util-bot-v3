@@ -1,3 +1,5 @@
+// 基本的なMySQL用の処理を定義するファイル
+
 import mysql from "mysql2/promise"
 import { developLog, notNull } from "@/util"
 
@@ -6,7 +8,6 @@ const MYSQL_HOST = notNull( process.env.MYSQL_HOST )
 const MYSQL_USER = notNull( process.env.MYSQL_USER )
 const MYSQL_PASSWORD = notNull( process.env.MYSQL_PASSWORD )
 const MYSQL_DATABASE = notNull( process.env.MYSQL_DATABASE )
-
 developLog( `MYSQL_HOST = ${ MYSQL_HOST }` )
 developLog( `MYSQL_USER = ${ MYSQL_USER }` )
 developLog( `MYSQL_PASSWORD = ${ MYSQL_PASSWORD }` )
@@ -27,4 +28,7 @@ const createConnection = () =>
 	} )
 }
 
-export { createConnection }
+export
+{
+	createConnection
+}
