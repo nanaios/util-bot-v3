@@ -38,7 +38,7 @@ const backupImage = async ( channel: TextChannel ) =>
 		{
 			// 挿入を実行
 			// discord apiの仕様上、メッセージのidは0より大きいのでこの後の処理で使用しやすいよう0を挿入する
-			executeInsertBackupProgress( connection, channel, 0 )
+			executeInsertBackupProgress( connection, channel, "0" )
 
 			// 変数もレコードに合わせて更新
 			lastBackupMessageId = "0"
@@ -92,7 +92,7 @@ const backupImage = async ( channel: TextChannel ) =>
 
 				// 処理済みのメッセージidを更新
 				lastBackupMessageId = id
-				executeUpdateBackupProgress( connection, channel, Number( id ) )
+				executeUpdateBackupProgress( connection, channel, lastBackupMessageId )
 			}
 		}
 	} catch ( e )

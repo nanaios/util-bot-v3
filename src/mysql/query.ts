@@ -1,9 +1,9 @@
 // 特定のMySQL処理を定義するファイル
 
-import type { Channel, TextChannel } from "discord.js"
+import type { TextChannel } from "discord.js"
 import type { Connection, ResultSetHeader } from "mysql2/promise"
 import squel from "squel"
-import type { BackupProgress, ChannelInfo } from "@/mysql/tables"
+import type { BackupProgress } from "@/mysql/tables"
 import { developLog } from "@/util"
 
 // テーブル名の定数
@@ -39,7 +39,7 @@ const executeSelectBackupProgress = async ( connection: Connection, channel: Tex
  * @param channel - バックアップ進捗を挿入したいチャンネル
  * @returns　挿入結果
  */
-const executeUpdateBackupProgress = async ( connection: Connection, channel: TextChannel, messageId: number ) =>
+const executeUpdateBackupProgress = async ( connection: Connection, channel: TextChannel, messageId: string ) =>
 {
 	console.group( "execut update" )
 
@@ -65,7 +65,7 @@ const executeUpdateBackupProgress = async ( connection: Connection, channel: Tex
  * @param channel - バックアップ進捗を更新したいチャンネル
  * @returns　更新結果
  */
-const executeInsertBackupProgress = async ( connection: Connection, channel: TextChannel, messageId: number ) =>
+const executeInsertBackupProgress = async ( connection: Connection, channel: TextChannel, messageId: string ) =>
 {
 	console.group( "execut insert" )
 
