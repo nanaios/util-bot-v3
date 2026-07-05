@@ -1,7 +1,7 @@
 {
 	"name": "util-bot-v3",
-	"version": "0.1.0",
-	"description": "自分用のdiscord bot",
+	"version": "1.0.0",
+	"description": "discordのチャンネルに投稿された画像を取得し、バックアップするbot",
 	"license": "MIT",
 	"author": "nanaios",
 	"type": "module",
@@ -10,8 +10,8 @@
 		"start": "docker compose up --build",
 		"build": "node esbuild.mjs",
 		"test": "npx vitest",
-		"build_image": "docker build -t 192.168.0.168:5000/discord-util-bot-v3:latest .",
-		"push_image": "docker push 192.168.0.168:5000/discord-util-bot-v3:latest"
+		"build_image": "docker build -t 192.168.0.168:5000/discord-util-bot-v3:%npm_package_version% .",
+		"push_image": "docker push 192.168.0.168:5000/discord-util-bot-v3:%npm_package_version%"
 	},
 	"dependencies": {
 		"discord.js": "14.26.4",
